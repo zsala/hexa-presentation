@@ -23,6 +23,19 @@ export default class ProductRepository {
     }
   }
 
+  getAll(): Product[] {
+    const products: Product[] = [];
+    const files = fs.readdirSync(folderPathProducts);
+    for (let id of files) {
+      const path = folderPathProducts + id;
+      const product = this.getById(path);
+      if (product) {
+        products.push(product);
+      }
+    }
+    return products;
+  }
+
   upsert(data: Product): void {
     const {
       id,

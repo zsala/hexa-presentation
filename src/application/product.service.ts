@@ -24,11 +24,10 @@ export default class ProductService {
     this.productRepository.upsert(data);
   }
 
-  getById(id: string): Product | null {
+  getById(id: string): Product {
     const voucher = this.voucherRepository.getById("10");
-
-    // retrieve data
     const path = folderPathProducts + (id as string)!.toLowerCase() + ".json";
+    
     let product = this.productRepository.getById(path);
 
     // apply discount
@@ -40,20 +39,19 @@ export default class ProductService {
     return product;
   }
 
-  getAll(ids: string[]): (Product | null)[] {
+  getAll(): Product[] {
     const voucher = this.voucherRepository.getById("10");
+    const products = this.productRepository.getAll();
 
-    const result = ids.map((id: string) => {
-      const path = folderPathProducts + id;
-      let product = this.productRepository.getById(path);
+    if (voucher) {
+      return products.map((product: Product) => {
+        return this.voucherCalculatorService.applyDiscountToProduct(
+          product,
+          voucher!
+        );
+      });
+    }
 
-      // apply discount
-      product = this.voucherCalculatorService.applyDiscountToProduct(
-        product!,
-        voucher!
-      );
-      return product;
-    });
-    return result;
+    return products;
   }
 }

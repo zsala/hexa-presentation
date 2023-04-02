@@ -20,10 +20,8 @@ export default class ProductController {
 
     // retrieve all products
     if (!id) {
-      fs.readdir(folderPathProducts, (err, files) => {
-        const result = this.productService.getAll(files);
-        res.json(result);
-      });
+      const products = this.productService.getAll();
+      res.json(this.productDTOMapper.toDomains(products));
     } else {
       // retrieve a single product
       const product = this.productService.getById(id as string);
