@@ -20,16 +20,17 @@ export default class ProductController {
     if (!id) {
       const products = this.productService.getAll();
       res.json(this.productDTOMapper.toDomains(products));
-    } else {
-      // retrieve a single product
-      const product = this.productService.getById(id as string);
-
-      if (product) {
-        res.json(this.productDTOMapper.toDomain(product));
-      } else {
-        res.sendStatus(404);
-      }
+      return;
     }
+
+    // retrieve a single product
+    const product = this.productService.getById(id as string);
+    if (product) {
+      res.json(this.productDTOMapper.toDomain(product));
+      return;
+    }
+
+    res.sendStatus(404);
   }
 
   post(req: Request, res: Response): void {

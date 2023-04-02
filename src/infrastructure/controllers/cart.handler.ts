@@ -19,8 +19,9 @@ export default class CartController {
       const dto = this.cartDTOMapper.toDomain(cart);
 
       res.json(dto);
-    } else {
-      res.sendStatus(404);
+      return;
     }
+
+    res.sendStatus(404);
   }
 }
