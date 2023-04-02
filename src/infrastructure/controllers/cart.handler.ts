@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
+import { Inject, Service } from "typedi";
 import { CartService } from "../../application";
 import CartDTOMapper from "./mappers/cart.dto.mapper";
 
+@Service()
 export default class CartController {
-  cartService: CartService;
   cartDTOMapper: CartDTOMapper;
 
-  constructor(cartService: CartService) {
-    this.cartService = cartService;
+  constructor(@Inject() private cartService: CartService) {
     this.cartDTOMapper = new CartDTOMapper();
   }
 

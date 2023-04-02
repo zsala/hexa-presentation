@@ -1,34 +1,18 @@
+import "reflect-metadata";
 import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import {
-  CartRepository,
-  ProductRepository,
-  VoucherRepository,
-} from "./infrastructure/repositories";
 import CartController from "./infrastructure/controllers/cart.handler";
 import ProductController from "./infrastructure/controllers/product.handler";
-import { CartService, ProductService } from "./application";
+// import { CartService, ProductService } from "./application";
+import Container from "typedi";
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-// routes and controller initialization
-const productRepository = new ProductRepository();
-const voucherRepository = new VoucherRepository();
-const cartRepository = new CartRepository();
-
-const cartService = new CartService(
-  voucherRepository,
-  productRepository,
-  cartRepository
-);
-
-const productService = new ProductService(voucherRepository, productRepository);
-
-const productController = new ProductController(productService);
-const cartController = new CartController(cartService);
+const productController = Container.get(ProductController);
+const cartController = Container.get(CartController);
 
 app.get("/products", (req: Request, res: Response) => {
   productController.get(req, res);

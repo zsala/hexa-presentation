@@ -2,9 +2,10 @@ import CartModel from "./models/cart-model";
 import { CartDbMapper } from "./mappers";
 import Cart from "../../domain/cart";
 import fs from "fs";
+import { Service } from "typedi";
 
 export const folderPathCart = "./src/local-data/carts/";
-
+@Service()
 export default class CartRepository {
   getById(): Cart | null {
     let data;

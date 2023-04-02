@@ -1,4 +1,4 @@
-import { ProductModel } from "../infrastructure/repositories/models";
+import { Inject, Service } from "typedi";
 import {
   VoucherRepository,
   ProductRepository,
@@ -8,20 +8,15 @@ import { folderPathProducts } from "../infrastructure/repositories/product.repos
 import { Cart, Product } from "../domain";
 import VoucherCalculatorService from "../domain/services/voucher.calculator.service";
 
+@Service()
 export default class CartService {
-  voucherRepository: VoucherRepository;
-  productRepository: ProductRepository;
-  cartRepository: CartRepository;
   voucherCalculatorService: VoucherCalculatorService;
 
   constructor(
-    voucherRepository: VoucherRepository,
-    productRepository: ProductRepository,
-    cartRepository: CartRepository
+    @Inject() private voucherRepository: VoucherRepository,
+    @Inject() private productRepository: ProductRepository,
+    @Inject() private cartRepository: CartRepository
   ) {
-    this.voucherRepository = voucherRepository;
-    this.productRepository = productRepository;
-    this.cartRepository = cartRepository;
     this.voucherCalculatorService = new VoucherCalculatorService();
   }
 

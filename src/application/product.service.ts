@@ -5,18 +5,16 @@ import {
 import { folderPathProducts } from "../infrastructure/repositories/product.repository";
 import VoucherCalculatorService from "../domain/services/voucher.calculator.service";
 import { Product } from "../domain";
+import { Inject, Service } from "typedi";
 
+@Service()
 export default class ProductService {
-  voucherRepository: VoucherRepository;
-  productRepository: ProductRepository;
   voucherCalculatorService: VoucherCalculatorService;
 
   constructor(
-    voucherRepository: VoucherRepository,
-    productRepository: ProductRepository
+    @Inject() private voucherRepository: VoucherRepository,
+    @Inject() private productRepository: ProductRepository
   ) {
-    this.voucherRepository = voucherRepository;
-    this.productRepository = productRepository;
     this.voucherCalculatorService = new VoucherCalculatorService();
   }
 

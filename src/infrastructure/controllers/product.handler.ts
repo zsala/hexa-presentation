@@ -1,16 +1,14 @@
 import { Request, Response } from "express";
-import fs from "fs";
+import { Inject, Service } from "typedi";
 import { ProductService } from "../../application";
 import { Product } from "../../domain";
-import { folderPathProducts } from "../repositories/product.repository";
 import ProductDTOMapper from "./mappers/product.mapper.dto";
 
+@Service()
 export default class ProductController {
-  productService: ProductService;
   productDTOMapper: ProductDTOMapper;
 
-  constructor(productService: ProductService) {
-    this.productService = productService;
+  constructor(@Inject() private productService: ProductService) {
     this.productDTOMapper = new ProductDTOMapper();
   }
 

@@ -1,8 +1,10 @@
 import fs from "fs";
+import { Service } from "typedi";
 import VoucherModel from "./models/voucher-model";
 
 export const folderPathVouchers = "./src/local-data/vouchers/";
 
+@Service()
 export default class VoucherRepository {
   getById(id: string): VoucherModel | null {
     let data;
