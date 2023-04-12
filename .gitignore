@@ -1,3 +1,4 @@
 node_modules
 local-data
 dist
+src/view/.DS_Store

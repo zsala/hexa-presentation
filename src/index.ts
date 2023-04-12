@@ -4,8 +4,11 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import CartController from "./infrastructure/controllers/cart.handler";
 import ProductController from "./infrastructure/controllers/product.handler";
-// import { CartService, ProductService } from "./application";
 import Container from "typedi";
+import * as dotenv from "dotenv";
+
+// Load environmental variables
+dotenv.config({ path: __dirname +'/.env' });
 
 const app = express();
 app.use(bodyParser.json());
@@ -25,6 +28,7 @@ app.get("/carts", (req: Request, res: Response) => {
 });
 
 // start application
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+app.listen(process.env.PORT, () => {
+  console.log(`Server environment: ${process.env.NODE_ENV}`);
+  console.log(`Server running on port: ${process.env.PORT}`);
 });
