@@ -8,7 +8,7 @@ import Container from "typedi";
 import * as dotenv from "dotenv";
 
 // Load environmental variables
-dotenv.config({ path: __dirname +'/.env' });
+dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());

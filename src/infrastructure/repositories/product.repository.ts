@@ -4,7 +4,7 @@ import { ProductDbMapper } from "./mappers";
 import ProductModel from "./models/product-model";
 import { Service } from "typedi";
 
-export const folderPathProducts = "./src/local-data/products/";
+export const folderPathProducts = "./local-data/products/";
 
 @Service()
 export default class ProductRepository {

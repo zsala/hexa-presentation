@@ -4,7 +4,7 @@ import Cart from "../../domain/cart";
 import fs from "fs";
 import { Service } from "typedi";
 
-export const folderPathCart = "./src/local-data/carts/";
+export const folderPathCart = "./local-data/carts/";
 @Service()
 export default class CartRepository {
   getById(): Cart | null {
