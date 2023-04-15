@@ -1,4 +1,4 @@
-export default interface IProductData {
+export default interface ProductRequestDto {
   id: string;
   name: string;
   price: number;

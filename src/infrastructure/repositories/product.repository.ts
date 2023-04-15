@@ -2,7 +2,7 @@ import fs from "fs";
 import { Product } from "../../domain";
 import { ProductDbMapper } from "./mappers";
 import ProductModel from "./models/product-model";
-import { Service } from 'typedi';
+import { Service } from "typedi";
 
 export const folderPathProducts = "./src/local-data/products/";
 
@@ -39,8 +39,15 @@ export default class ProductRepository {
   }
 
   upsert(data: Product): void {
+    let product = this.getById(data.id);
+    product = product ? this.#update(data, product) : this.#create(data);
+
+    // save data
+    this.#save(product);
+  }
+
+  #update(data: Product, product: Product): Product {
     const {
-      id,
       name,
       title1,
       title2,
@@ -53,8 +60,8 @@ export default class ProductRepository {
       price,
     } = data;
 
-    const product: Product = new Product({ id, name });
-    product
+    return product
+      .setName(name)
       .setTitle1(title1!)
       .setTitle2(title2!)
       .setTitle3(title3!)
@@ -64,8 +71,13 @@ export default class ProductRepository {
       .setDescription3(description3!)
       .setDescription4(description4!)
       .setPrice(price);
+  }
 
-    // save data
+  #create(data: Product): Product {
+    return new Product(data);
+  }
+
+  #save(product: Product) {
     const path = folderPathProducts + product.id.toLowerCase() + ".json";
     fs.writeFileSync(path, JSON.stringify(product));
   }

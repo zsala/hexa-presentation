@@ -1,5 +1,5 @@
 import Cart from "../../../domain/cart";
-import { CartDTO, CartProductDTO } from "../dtos";
+import { CartProductResponseDTO, CartResponseDTO } from "../dtos";
 import CartProductDTOMapper from "./cart-product.mapper.dto";
 
 export default class CartDTOMapper {
@@ -9,9 +9,10 @@ export default class CartDTOMapper {
     this.cartProductDTOMapper = new CartProductDTOMapper();
   }
 
-  toDomain(cart: Cart): CartDTO {
-    const cartProductDTO: CartProductDTO[] = this.cartProductDTOMapper.toDomains(cart.products);
-    const cartDTO = new CartDTO();
+  toDomain(cart: Cart): CartResponseDTO {
+    const cartProductDTO: CartProductResponseDTO[] =
+      this.cartProductDTOMapper.toDomains(cart.products);
+    const cartDTO = new CartResponseDTO();
     cartDTO.id = cart.id;
     cartDTO.setTotal(cart.total);
     cartDTO.setTotalWithDiscount(cart.totalWithDiscount);

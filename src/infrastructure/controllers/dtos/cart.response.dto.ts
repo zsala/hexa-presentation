@@ -1,10 +1,10 @@
-import CartProductDTO from "./cart-product.dto";
+import CartProductResponseDTO from "./cart-product.response.dto";
 
-export default class CartDTO {
+export default class CartResponseDTO {
   id: string;
   name: string;
 
-  products: CartProductDTO[];
+  products: CartProductResponseDTO[];
 
   totalWithDiscount: number;
   total: number;
@@ -23,7 +23,7 @@ export default class CartDTO {
     return this;
   }
 
-  setProducts(products: CartProductDTO[]): this {
+  setProducts(products: CartProductResponseDTO[]): this {
     this.products = products;
     return this;
   }

@@ -1,25 +1,16 @@
 import Product from "../../../domain/product";
-import { CartProductDTO, ProductDTO } from "../dtos";
+import { IProductData } from "../../repositories/interfaces";
+import { CartProductResponseDTO, ProductResponseDTO } from "../dtos";
 
 export default class ProductDTOMapper {
-  toDomain(product: Product): ProductDTO {
-    const productDTO: ProductDTO = new ProductDTO({
-      id: product.id,
-      name: product.name,
-    });
-    return productDTO
-      .setTitle1(product.title1!)
-      .setTitle2(product.title2!)
-      .setTitle3(product.title3!)
-      .setTitle4(product.title4!)
-      .setDescription1(product.description1!)
-      .setDescription2(product.description2!)
-      .setDescription3(product.description3!)
-      .setDescription4(product.description4!)
-      .setPrice(product.price);
+  
+  toDomain(product: Product): ProductResponseDTO {
+    const productDTO: ProductResponseDTO = new ProductResponseDTO(product);
+
+    return productDTO.setId(product.id);
   }
 
-  toDomains(products: Product[]): CartProductDTO[] {
+  toDomains(products: Product[]): CartProductResponseDTO[] {
     return products.map((product) => this.toDomain(product));
   }
 }

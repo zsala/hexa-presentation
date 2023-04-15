@@ -1,5 +1,5 @@
-import CartProductDTO from "./cart-product.dto";
-import CartDTO from "./cart.dto";
-import ProductDTO from "./product.dto";
+import CartProductResponseDTO from "./cart-product.response.dto";
+import CartResponseDTO from "./cart.response.dto";
+import ProductResponseDTO from "./product.response.dto";
 
-export { CartProductDTO, CartDTO, ProductDTO };
+export { CartProductResponseDTO, CartResponseDTO, ProductResponseDTO };

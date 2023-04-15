@@ -1,32 +1,42 @@
 import { IProductData } from "../../../domain/interfaces";
 
-export default class ProductDTO {
+export default class ProductResponseDTO {
   id: string = '';
   name: string = '';
   price: number = 0;
 
-  title1: string;
-  title2: string;
-  title3: string;
-  title4: string;
+  title1: string | null;
+  title2: string | null;
+  title3: string | null;
+  title4: string | null;
 
-  description1: string;
-  description2: string;
-  description3: string;
-  description4: string;
+  description1: string | null;
+  description2: string | null;
+  description3: string | null;
+  description4: string | null;
 
   constructor(productData: IProductData) {
     this.id = productData.id;
     this.name = productData.name;
-    this.title1 = '';
-    this.title2 = '';
-    this.title3 = '';
-    this.title4 = '';
-    this.description1 = '';
-    this.description2 = '';
-    this.description3 = '';
-    this.description4 = '';
-    this.price = 0;
+    this.title1 = productData.title1;
+    this.title2 = productData.title2;
+    this.title3 = productData.title3;
+    this.title4 = productData.title4;
+    this.description1 = productData.description1;
+    this.description2 = productData.description2;
+    this.description3 = productData.description3;
+    this.description4 = productData.description1;
+    this.price = productData.price;
+  }
+
+  setId(id: string): this {
+    this.id = id;
+    return this;
+  }
+
+  setName(name: string): this {
+    this.name = name;
+    return this;
   }
 
   setTitle1(title1: string): this {

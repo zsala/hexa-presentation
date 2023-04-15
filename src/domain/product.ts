@@ -1,4 +1,5 @@
 import { IProductData } from "./interfaces";
+// import { v4 as uuid } from "uuid";
 
 export default class Product {
   id: string;
@@ -15,18 +16,41 @@ export default class Product {
   description3: string | null;
   description4: string | null;
 
-  constructor(productData: IProductData) {
-    this.id = productData.id;
-    this.name = productData.name;
-    this.title1 = null;
-    this.title2 = null;
-    this.title3 = null;
-    this.title4 = null;
-    this.description1 = null;
-    this.description2 = null;
-    this.description3 = null;
-    this.description4 = null;
-    this.price = 0;
+
+  constructor(props: IProductData) {
+    if (!props.name || props.name.trim().length === 0) {
+      throw new Error('Product name must not be empty');
+    }
+
+    if (props.price < 0) {
+      throw new Error('Product price must be non-negative');
+    }
+
+    this.id = props.id;
+    this.name = props.name;
+    this.title1 = props.title1;
+    this.title2 = props.title2;
+    this.title3 = props.title3;
+    this.title4 = props.title4;
+    this.description1 = props.description1;
+    this.description2 = props.description2;
+    this.description3 = props.description3;
+    this.description4 = props.description4;
+    this.price = props.price;
+  }
+
+  setId(id: string): this {
+    this.id = id;
+    return this;
+  }
+
+  setName(name: string): this {
+    if (!name || name.trim().length === 0) {
+      throw new Error('Product name must not be empty');
+    }
+
+    this.name = name;
+    return this;
   }
 
   setTitle1(title1: string): this {
@@ -70,6 +94,10 @@ export default class Product {
   }
 
   setPrice(price: number): this {
+    if (price < 0) {
+      throw new Error('Product price must be non-negative');
+    }
+
     this.price = price;
     return this;
   }

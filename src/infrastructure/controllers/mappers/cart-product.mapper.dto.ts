@@ -1,18 +1,12 @@
 import Product from "../../../domain/product";
-import { CartProductDTO } from "../dtos";
+import { CartProductResponseDTO } from "../dtos";
 
 export default class CartProductDTOMapper {
-  toDomain(product: Product): CartProductDTO {
-    const cartProductDTO: CartProductDTO = new CartProductDTO({
-      id: product.id,
-      name: product.name,
-    });
-    cartProductDTO.setPrice(product.price);
-
-    return cartProductDTO;
+  toDomain(product: Product): CartProductResponseDTO {
+    return new CartProductResponseDTO(product);
   }
 
-  toDomains(products: Product[]): CartProductDTO[] {
+  toDomains(products: Product[]): CartProductResponseDTO[] {
     return products.map((product) => this.toDomain(product));
   }
 }

@@ -6,6 +6,8 @@ tbd
 
 tbd
 
+- copy .env file to /dist folder
+
 ### Example description
 
 tbd
